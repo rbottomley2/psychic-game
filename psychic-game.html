@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Psychic</title>
+  </head>
+  <body>
+  <h1>The Psychic Game!</h1>
+  <h3>Guess What Letter I'm Thinking Of!</h3>
+    Letters Guessed: <span id="spanLettersGuessed"></span><br>
+    Guesses Left: <span id="spanGuessesLeft"></span><br>
+    Wins: <span id="spanUserWins">0</span><br/>
+    Losses: <span id="spanComputerWins">0</span><br/>
+
+
+  
+    <script type="text/javascript">
+    var computerChoice;
+    var userChoice;
+    var guessesLeft = 10;
+    var computerWins = 0;
+    var userWins = 0;
+    var spanComputerChoice = document.getElementById("spanComputerChoice");
+    var spanLettersGuessed = document.getElementById("spanLettersGuessed");
+    var spanGuessesLeft = document.getElementById("spanGuessesLeft");
+    var spanUserWins = document.getElementById("spanUserWins");
+    var spanComputerWins = document.getElementById("spanComputerWins");
+
+    var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    
+    function guesses() {
+      guessesLeft--;
+      spanGuessesLeft.textContent = guessesLeft;
+    }
+    
+
+   //capture user input 
+    document.onkeyup = function(event) {
+      var keyHit = event.key;
+      userChoice = keyHit;
+      alert("The User Chose: " + userChoice);
+
+
+      
+      // create html elements for each user key entry for letters guessed
+      var letters = document.getElementById("spanLettersGuessed");
+      var newletters = document.createElement("div");
+      newletters.innerHTML = userChoice;
+      letters.appendChild(newletters);
+      
+      //random letter generator which outputs "computerChoice" to be compared to user input "userChoice"
+
+      var randomLetter = alphabet[Math.floor(Math.random() * 26)];
+      alert("The Computer Chose: " + randomLetter);
+      
+      //game logic
+              
+                
+              if(userChoice == randomLetter && guessesLeft > 0) {
+                  userWins++;
+                  spanUserWins.textContent = userWins;
+                  
+                  
+              } else if (userChoice !== randomLetter && guessesLeft > 0) {
+                    computerWins++;
+                    guesses();
+                    spanComputerWins.textContent = computerWins;           
+              } 
+
+
+              
+    };
+      
+    </script>
+    
+  </body>
+</html>
